@@ -52,13 +52,14 @@ dynatrace-dql-log-analysis/
 
 ### Python ↔ DQL Mapping
 
-| Dynatrace DQL                                                  | Python Implementation                                    |
-| -------------------------------------------------------------- | -------------------------------------------------------- |
-| `filter log.source == "dql-exercise"`                          | `if log.get("log.source") == "dql-exercise":`            |
-| `filter level == "ERROR"`                                      | `if log.get("level") == "ERROR":`                        |
-| `parse content, "FunctionInvocation failed due to " LD reason` | `parse_ld(content, "FunctionInvocation failed due to ")` |
-| `summarize failures = count(), by: { service, reason }`        | `defaultdict(int)` with `(service, reason)` tuple key    |
-| `sort failures desc`                                           | `sorted(..., reverse=True)`                              |
+| Dynatrace DQL                                                  | Python Implementation                                                  |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `filter log.source == "dql-exercise"`                          | `if log.get("log.source") == "dql-exercise":`                          |
+| `filter level == "ERROR"`                                      | `if log.get("level") == "ERROR":`                                      |
+| `parse content, "FunctionInvocation failed due to " LD reason` | `reason = parse_ld(log.get("content", ""), "FunctionInvocation failed due to ")` |
+| `summarize failures = count(), by: { service, reason }`        | `summary[(log['service'], reason)] += 1  # using defaultdict(int)`     |
+| `sort failures desc`                                           | `sorted_summary = sorted(summary.items(), key=lambda x: x[1], reverse=True)` |
+
 
 
 ### Usage
@@ -88,3 +89,4 @@ python log_analysis.py
 
 ### LICENSE
 This project is open-source and available for learning and portfolio purposes
+
