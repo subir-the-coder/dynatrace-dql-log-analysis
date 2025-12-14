@@ -1,0 +1,30 @@
+[
+  {
+    "timestamp": "2025-12-10T10:15:30Z",
+    "log.source": "dql-exercise",
+    "content": "FunctionInvocation started for user login",
+    "level": "INFO",
+    "service": "auth-service"
+  },
+  {
+    "timestamp": "2025-12-10T10:15:32Z",
+    "log.source": "dql-exercise",
+    "content": "FunctionInvocation completed successfully",
+    "level": "INFO",
+    "service": "auth-service"
+  },
+  {
+    "timestamp": "2025-12-10T10:16:10Z",
+    "log.source": "dql-exercise",
+    "content": "FunctionInvocation failed due to timeout",
+    "level": "ERROR",
+    "service": "payment-service"
+  },
+  {
+    "timestamp": "2025-12-10T10:17:05Z",
+    "log.source": "system",
+    "content": "Health check OK",
+    "level": "INFO",
+    "service": "monitoring"
+  }
+]
